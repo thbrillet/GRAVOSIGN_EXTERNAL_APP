@@ -1,5 +1,5 @@
 module API
-  module v1
+  module V1
     class PdfController < ActionController::API
       def create
         pdf = Pdf.new(json: params[:json])
