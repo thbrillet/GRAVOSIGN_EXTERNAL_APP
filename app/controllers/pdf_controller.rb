@@ -131,7 +131,7 @@ class PdfController < ApplicationController
 
   def show
     @pdf = Pdf.find(params[:id])
-    json = JSON.parse @pdf.json
+    json = JSON.parse(@pdf.json).deep_symbolize_keys
 
     # construction du pdf
 
