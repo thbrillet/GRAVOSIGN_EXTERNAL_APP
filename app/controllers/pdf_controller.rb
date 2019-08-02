@@ -3,7 +3,7 @@ require "prawn/measurement_extensions"
 class PdfController < ApplicationController
   def index
 
-    json = {"pdf_size":{"height":120,"width":170},"product_size":{"height":100,"width":150,"position":[85,60],"bg_color":"","shape":"circle"},"product_fix":[{"x":85,"y":105,"diam":2.25},{"x":15,"y":60,"diam":2.25},{"x":155,"y":60,"diam":2.25},{"x":85,"y":15,"diam":2.25}],"fix_stroke":"rgb(255,0,0)","text":[{"height":27.672955974842765,"width":94.0251572327044,"at":[55.0314465408805,38.0503144654088],"text_align":"left","font_size":6.289308176100628,"font_family":"OpenSans","content":"Votre texte icidd dddd ddd ddddd dd dddd dd d ddd ddd dddd ddddd ddddd ddd hhh h"}],"svg":[{"height":51.57232704402515,"width":44.65408805031446,"at":[14.779874213836477,16.352201257861633],"orientation":"","source":"<svg id='GRAVOSIGN_PICTO_3' data-name='Calque 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 425.2 425.2'><polygon class='color-svg svg-bank-3' points='364.52 228.69 89.53 358.77 180.6 228.69 89.53 98.61 364.52 228.69'/></svg>"},{"height":20.754716981132074,"width":35.84905660377358,"at":[36.477987421383645,56.91823899371069],"orientation":"90","source":"<svg id='GRAVOSIGN_PICTO_4' data-name='Calque 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 425.2 425.2'><polygon class='color-svg svg-bank-4' points='340.06 212.62 127.59 347.9 127.59 68.91 126.99 67.71 340.06 212.62'/></svg>"}]}
+    json = {"pdf_size":{"height":120,"width":170},"product_size":{"height":100,"width":150,"position":[10,110],"bg_color":"","shape":"rectangle"},"fix_stroke":"rgb(255,0,0)","text":[{"height":31.446540880503143,"width":150,"at":[0,23.270440251572325],"text_align":"center","font_size":5.660377358490566,"font_family":"OpenSans","content":"Votre texte ici"}],"svg":[{"height":78.61635220125785,"width":78.61635220125785,"at":[71.38364779874213,20.12578616352201],"orientation":"270","source":"<svg id='GRAVOSIGN_PICTO_12' data-name='Calque 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 425.2 425.2'><path class='color-svg' d='M266.21,216.33l.33,1.23a10.57,10.57,0,0,1,.09,3.82A12,12,0,0,1,256,231a12.54,12.54,0,0,1-12.79-6.68,5.76,5.76,0,0,1-.28-.68q-.66-2-1.25-4l-23-79.11-.78-1a4.07,4.07,0,0,0-3.93-.94,3.8,3.8,0,0,0-2.67,3,3.16,3.16,0,0,0,0,1.12q.18.84.42,1.67L249.22,280.1l0,.78a4.15,4.15,0,0,1-2.58,3.43l-.83.25-25,.52a7.85,7.85,0,0,0-6.54,3.76,4.17,4.17,0,0,0-.54,1.54,17.7,17.7,0,0,0-.17,2.41l-.13,89a12.56,12.56,0,0,1-2.4,5.95,14.56,14.56,0,0,1-14,5.42,13.64,13.64,0,0,1-11.25-10,6.47,6.47,0,0,1-.15-1q-.12-1.69-.12-3.38l-.11-89.06.07-.94-.06-.3a4,4,0,0,0-7.7-.69,3.18,3.18,0,0,0-.21.94q0,.75,0,1.51v91.12l-.22.8a14.54,14.54,0,0,1-3,5.28A16.75,16.75,0,0,1,156,391.72a15,15,0,0,1-9.77-11.64l-.16-2.14.07-87.83-.88-1.27a8.1,8.1,0,0,0-5.26-2.92l-.89-.06-25.74-.67L113,285a3.63,3.63,0,0,1-1.52-3.43q.22-.89.47-1.77l37.43-134.37a2.73,2.73,0,0,0-.12-1.85,4.7,4.7,0,0,0-.78-1.22,4.2,4.2,0,0,0-5.41-.69A3,3,0,0,0,142,143q-.5,1.28-.87,2.61l-16.8,59.48L118.69,225a1.63,1.63,0,0,1-.21.52,18,18,0,0,1-1.6,2.12,13.91,13.91,0,0,1-14.34,3.92,12.44,12.44,0,0,1-9.14-11.25l.1-1.89,26.43-90.74.6-1a46.08,46.08,0,0,1,38.11-21.79l42.19,0a42.32,42.32,0,0,1,37.7,20.74,16.3,16.3,0,0,1,1.4,3.29Z'/><path class='color-svg' d='M144.92,63.33A34,34,0,1,1,145,65Q144.92,64.17,144.92,63.33Z'/></svg>"}]}
 
     #pdf_size :
     pdf = Prawn::Document.new(
@@ -127,5 +127,10 @@ class PdfController < ApplicationController
       filename: "export.pdf",
       type: 'application/pdf',
       disposition: 'inline'
+  end
+
+  def create
+    Pdf.new(json: params[:json])
+    head :ok
   end
 end
