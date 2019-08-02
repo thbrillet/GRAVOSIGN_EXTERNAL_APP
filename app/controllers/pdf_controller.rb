@@ -128,9 +128,4 @@ class PdfController < ApplicationController
       type: 'application/pdf',
       disposition: 'inline'
   end
-
-  def create
-    Pdf.new(json: params[:json])
-    head :ok
-  end
 end
