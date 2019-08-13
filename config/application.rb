@@ -22,7 +22,8 @@ module GRAVOSIGNExternalApp
     # the framework and any gems in your application.
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins '*'
+        # origins '*' # WE KNOW IT WORKS
+        origins 'https://gravosign-test.myshopify.com' # BETTER SECURITY
         resource '*', headers: :any, methods: [:get, :post, :options]
       end
     end

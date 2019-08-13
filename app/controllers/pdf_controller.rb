@@ -12,7 +12,7 @@ class PdfController < ApplicationController
     )
 
     #product_size & shape :
-    pdf.stroke_color "000000"
+    pdf.stroke_color "D40017"
     if json[:product_size][:shape] == "rounded-rectangle"
       pdf.stroke_rounded_rectangle [json[:product_size][:position][0].mm, json[:product_size][:position][1].mm], json[:product_size][:width].mm, json[:product_size][:height].mm, 10.mm
     elsif json[:product_size][:shape] == "circle"
