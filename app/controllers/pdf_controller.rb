@@ -135,6 +135,15 @@ class PdfController < ApplicationController
       end
     end
 
+    #images :
+    if json[:images]
+      json[:images].each do |image_element|
+        image = 'https://i.ytimg.com/vi/rQZ4eOONfIw/hqdefault.jpg'
+        pdf.image image, at: [image_element[:at][0].mm + 10.mm, image_element[:at][1].mm + 10.mm], width: image_element[:width].mm
+      end
+    end
+
+
     #pdf_save :
     send_data pdf.render,
       filename: "export.pdf",
@@ -277,6 +286,14 @@ class PdfController < ApplicationController
             pdf.svg svg_element[:source]
           end
         end
+      end
+    end
+
+    #images :
+    if json[:images]
+      json[:images].each do |image_element|
+        image = @pdf.pictures.find_by(filename: image_element[:fileName])
+        pdf.image open(image.photo.url), at: [image_element[:at][0].mm + 10.mm, image_element[:at][1].mm + 10.mm], width: image_element[:width].mm
       end
     end
 

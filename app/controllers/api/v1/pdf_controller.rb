@@ -2,13 +2,16 @@ module API
   module V1
     class PdfController < ActionController::API
       def create
-        pdf = Pdf.new(json: JSON.parse(params[:json]))
-        # params[:files].each do |file|
-        #   pdf.pictures.build(image: file) # cloudinary mange tout seul grace à CarrierWave (kitt)
-        # end
-        p "################"
-        p params
-        p "################"
+        pdf = Pdf.new(json: params[:json])
+        if params[:files]
+          params[:files].each do |file|
+          # binding.pry
+            pdf.pictures.build(
+              photo: file,
+              filename: file.original_filename
+            )
+          end
+        end
 
         if pdf.save
           render json: { new_pdf_url: pdf_path(pdf) }
