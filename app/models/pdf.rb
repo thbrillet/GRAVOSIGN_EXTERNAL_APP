@@ -1,5 +1,3 @@
 class Pdf < ApplicationRecord
-  def create
-
-  end
+  has_many :pictures, dependent: :destroy
 end
